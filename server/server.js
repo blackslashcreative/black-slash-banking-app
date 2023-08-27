@@ -5,7 +5,7 @@ import 'dotenv/config';
 import express         from 'express';
 import cors            from 'cors';
 import mongoose from 'mongoose';
-import { create, all } from './dal.js';
+import { create, getUser, all } from './dal.js';
 
 const app = express();
 
@@ -13,12 +13,24 @@ const app = express();
 app.use(express.static('public'));
 app.use(cors());
 
-// create user account
+// Create user account
 app.get('/api/account/create/:uid/:firstname/:lastname/:email', function (req, res) {
   create(req.params.uid,req.params.firstname,req.params.lastname,req.params.email)
     .then((newUser) => {
       console.log(`Inserted new user into the db... ${JSON.stringify(newUser)}`);
       res.send(newUser);
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+});
+
+// Get one user
+app.get('/api/account/:uid', function (req, res) {
+  getUser(req.params.uid)
+    .then((user) => {
+      //console.log(`got the user here... ${JSON.stringify(user)}`);
+      res.send(user);
     })
     .catch((err) => {
       console.error(err);

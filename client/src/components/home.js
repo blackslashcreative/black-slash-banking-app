@@ -1,17 +1,49 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../context';
 import Card from './card';
+import axios from 'axios';
 
 function Home() {
   // App Context
   const context = useContext(AppContext);
   const { currentUser } = context;
-  console.log(`currentUser = ${JSON.stringify(currentUser)}`);
+
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading]   = useState(true);
+
+  useEffect((userData) => {
+    if (currentUser) {
+      // Get user data
+      console.log(`need to get uid... ${currentUser}`);
+      const uid = currentUser.uid;
+      axios.get(`/api/account/${uid}`)
+        .then(function (response) {
+          // handle success
+          setUserData(response.data);
+          console.log(`Homepage userData: ${JSON.stringify(userData)}`);
+          setLoading(false);
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+        .finally(function () {
+          // always executed
+        });
+    } else {
+      setLoading(false);
+    }
+  }, [currentUser]);
 
   const UserDashboard = () => {
     return (
       <>
-        testing
+        {userData && (
+          <>
+            <p>Hi, {userData.firstname}!</p>
+            <h5>Balance: ${userData.balance}</h5>
+          </>
+        )}
       </>
     )
   }
@@ -19,7 +51,10 @@ function Home() {
   return(
     <main id="dashboard" className="container">
       <h1>Home</h1>
-      {currentUser && 
+      {loading &&
+        <p>loading...</p>
+      }
+      {currentUser ? (
         <>
           <Card
           header="Your Account"
@@ -27,6 +62,9 @@ function Home() {
           />
           <div className="status">Logged in as {currentUser.email}</div>
         </>
+      ) : (
+        <>Please log in.</>
+      )
       }
     </main>
   )

@@ -3,6 +3,7 @@ import Card from './card';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { AppContext } from '../context';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 function CreateAccount() {
   return(
@@ -28,9 +29,11 @@ function CreateAccountForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  // Display success message and redirect after registration
+  const navigate = useNavigate();
   useEffect(() => {
     {currentUser &&
-      setSuccessMessage(`Logged in as ${currentUser.uid}`);
+      setSuccessMessage(`Logged in as ${currentUser.email}`);
     }
   }, [currentUser]);
 
@@ -50,8 +53,12 @@ function CreateAccountForm() {
         axios.get(`/api/account/create/${uid}/${firstName}/${lastName}/${email}`)
         .then(function (response) {
           // handle success
-          console.log(`Response data...${JSON.stringify(response.data)}`);
+          //console.log(`Response data...${JSON.stringify(response.data)}`);
+          //console.log(`userCredential.user... ${JSON.stringify(userCredential.user)}`);
           setCurrentUser(userCredential.user);
+          setTimeout(() => {
+            navigate('/')
+          }, 2000);
         })
         .catch(function (error) {
           // handle error

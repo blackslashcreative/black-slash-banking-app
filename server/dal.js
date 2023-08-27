@@ -47,6 +47,17 @@ async function create(uid, firstname, lastname, email) {
   }
 };
 
+// Function: Get user data
+async function getUser(uid) {
+  try {
+    const user = await User.findById(uid);
+    return user;
+  } 
+  catch (error) {
+    throw error;
+  }
+};
+
 // Function: Get all users
 async function all() {
   try {
@@ -69,4 +80,4 @@ async function all() {
   }
 };
 
-export { create, all };
+export { create, getUser, all };
