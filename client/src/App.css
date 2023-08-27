@@ -20,3 +20,11 @@ main > .card .card-header {
 .error {
   color: #dc3545;
 }
+
+.navbar-nav {
+  flex-grow: 1;
+}
+
+.flex-right {
+  margin-left: auto;
+}
