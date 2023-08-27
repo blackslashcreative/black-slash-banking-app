@@ -1,11 +1,6 @@
 function Card(props) {
-  function classes() {
-    const bg = props.bgcolor ? ' bg-' + props.bgcolor : ' ';
-    return 'card mb-3 ' + bg;
-  }
-
   return (
-    <div className={classes()}>
+    <div className="card mb-3">
       <div className="card-header">{props.header}</div>
       <div className="card-body">
         {props.title && (<h5 className="card-title">{props.title}</h5>)}

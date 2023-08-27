@@ -7,7 +7,6 @@ function CreateAccount() {
   return(
     <main className="container">
       <Card
-      bgcolor="light"
       header="Register"
       body={<CreateAccountForm/>}
       />
@@ -16,12 +15,11 @@ function CreateAccount() {
 }
 
 function CreateAccountForm() {
-
+  // App Context
   const context = useContext(AppContext);
-  //console.log(`context: ${JSON.stringify(context)}`);
   const { currentUser, setCurrentUser, firebaseapp } = context;
   const auth = getAuth(firebaseapp);
-  
+  // Form State
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -39,7 +37,6 @@ function CreateAccountForm() {
     e.preventDefault();
     setErrorMessage('');
     //const userExists = 
-    //console.log(FirstName,LastName,email,password);
     if (!firstName || !lastName || !email || !password) {
       setErrorMessage('All fields are required.');
       setSuccessMessage('');

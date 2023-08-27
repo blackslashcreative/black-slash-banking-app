@@ -1,10 +1,10 @@
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from './components/navbar';
 import Home from './components/home';
 import CreateAccount from './components/createaccount';
-import LoginForm from './components/login';
+import Login from './components/login';
 import Deposit from './components/deposit';
 import Withdraw from './components/withdraw';
 import Balance from './components/balance';
@@ -21,7 +21,7 @@ function App() {
           <Routes>
             <Route path="/" exact element={ <Home/> } />
             <Route path="/register/" exact element={ <CreateAccount/> } />
-            <Route path="/login/" exact element={ <LoginForm/> } />
+            <Route path="/login/" exact element={ <Login/> } />
             <Route path="/deposit/" exact element={ <Deposit/> } />
             <Route path="/withdraw/" exact element={ <Withdraw/> } />
             <Route path="/balance/" exact element={ <Balance/> } />

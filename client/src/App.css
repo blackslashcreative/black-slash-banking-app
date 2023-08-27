@@ -1,0 +1,22 @@
+main {
+  margin-top: 45px;
+}
+
+main > .card {
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+main > .card .card-header {
+  font-size: xx-large;
+}
+
+.alert {
+  background-color: hsla(0, 0%, 94%, 0.4);
+  margin: 15px 0;
+  padding: 10px 15px;
+}
+
+.error {
+  color: #dc3545;
+}
