@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 function Login(){
   return(
-    <main className="container">
+    <main className="container form">
       <Card
       header="Login"
       body={<LoginForm/>}

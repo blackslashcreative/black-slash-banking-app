@@ -4,10 +4,13 @@ main {
 
 main > .card {
   max-width: 450px;
+}
+
+main.form > .card {
   margin: 0 auto;
 }
 
-main > .card .card-header {
+main:not(#dashboard) > .card .card-header {
   font-size: xx-large;
 }
 

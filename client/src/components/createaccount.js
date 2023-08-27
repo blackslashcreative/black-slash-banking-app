@@ -2,10 +2,11 @@ import { useState, useContext, useEffect } from 'react';
 import Card from './card';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { AppContext } from '../context';
+import axios from 'axios';
 
 function CreateAccount() {
   return(
-    <main className="container">
+    <main className="container form">
       <Card
       header="Register"
       body={<CreateAccountForm/>}
@@ -45,7 +46,20 @@ function CreateAccountForm() {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
-        setCurrentUser(userCredential.user);
+        const uid = userCredential.user.uid;
+        axios.get(`/api/account/create/${uid}/${firstName}/${lastName}/${email}`)
+        .then(function (response) {
+          // handle success
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+        .finally(function () {
+          // always executed
+          setCurrentUser(userCredential.user);
+        });
         // ...
       })
       .catch((error) => {
@@ -53,20 +67,6 @@ function CreateAccountForm() {
         const errorMessage = error.message;
         console.log(`Auth Error: ${errorCode} + ${errorMessage}`);
       });
-    /*axios.get(`/api/account/create/${firstName}/${lastName}/${email}/${password}`)
-      .then(function (response) {
-        // handle success
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      })
-      .finally(function () {
-        // always executed
-      });*/
-      //.then((data) => setData(data.message));
-    //props.setShow(false);
   }
 
   return (

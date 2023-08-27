@@ -1,9 +1,10 @@
 /*************************************************************************
  * Express Server
  ************************************************************************/
+import 'dotenv/config';
 import express         from 'express';
 import cors            from 'cors';
-import { create, all } from '../dal.js';
+import { create, all } from './dal.js';
 
 const app = express();
 
@@ -17,13 +18,16 @@ app.get('/api', function (req, res) {
 });
 
 // create user account
-app.get('/api/account/create/:firstname/:lastname/:email/:password', function (req, res) {
+app.get('/api/account/create/:uid/:firstname/:lastname/:email', function (req, res) {
   res.send(
     {
-      "testing": "yep!"
+      "req.params.uid": req.params.uid,
+      "req.params.firstname": req.params.firstname,
+      "req.params.lastname": req.params.lastname,
+      "req.params.email": req.params.email
     }
   );
-  /*create(req.params.name,req.params.email,req.params.password)
+  /*create(req.params.uid,req.params.firstname,req.params.lastname,req.params.email)
     .then((user) => {
       console.log(user);
       res.send(user);
