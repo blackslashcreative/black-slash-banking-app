@@ -1,12 +1,9 @@
 import { useState, useContext } from 'react';
-import { UserContext } from "../App";
 import Card from './card';
-import axios from 'axios';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { AppContext } from '../context';
 
 function CreateAccount() {
-  const ctx = useContext(UserContext);
-  console.log(`ctx = ${JSON.stringify(ctx)}`);
-
   return(
     <Card
     bgcolor="light"
@@ -14,10 +11,14 @@ function CreateAccount() {
     body={<CreateAccountForm/>}
     />
   );
-
 }
 
-function CreateAccountForm(props) {
+function CreateAccountForm() {
+
+  const context = useContext(AppContext);
+  console.log(`context: ${JSON.stringify(context)}`);
+  const { currentUser, setCurrentUser, firebaseapp } = context;
+  const auth = getAuth(firebaseapp);
   
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -35,7 +36,19 @@ function CreateAccountForm(props) {
       setSuccessMessage('');
       return
     }
-    axios.get(`/api/account/create/${firstName}/${lastName}/${email}/${password}`)
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        setCurrentUser(userCredential.user);
+        setSuccessMessage('Logged in as ' + JSON.stringify(currentUser));
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(`Auth Error: ${errorCode} + ${errorMessage}`);
+      });
+    /*axios.get(`/api/account/create/${firstName}/${lastName}/${email}/${password}`)
       .then(function (response) {
         // handle success
         console.log(response.data);
@@ -46,7 +59,7 @@ function CreateAccountForm(props) {
       })
       .finally(function () {
         // always executed
-      });
+      });*/
       //.then((data) => setData(data.message));
     //props.setShow(false);
   }
@@ -84,6 +97,11 @@ function CreateAccountForm(props) {
     {errorMessage && (
       <div className="alert error">
         {errorMessage}
+      </div>
+    )}
+    {successMessage && (
+      <div className="alert success">
+        {successMessage}
       </div>
     )}
 
