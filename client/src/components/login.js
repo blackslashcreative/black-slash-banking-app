@@ -75,7 +75,7 @@ function LoginForm() {
           
         <button type="submit" 
           className="btn btn-light" 
-          onClick={handleFormSubmit}>Create Account</button>
+          onClick={handleFormSubmit}>Login</button>
 
         {errorMessage && (
           <div className="alert error">
