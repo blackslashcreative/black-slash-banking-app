@@ -9,9 +9,9 @@ function LoginForm(){
   const { currentUser, setCurrentUser } = context;
 
   return(
-    <>
-    <h1>Login</h1>
-    </>
+    <main className="container">
+      <h1>Login</h1>
+    </main>
   )
 };
 

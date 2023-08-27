@@ -15,10 +15,9 @@ function App() {
 
   return (
     <>
-      <NavBar/>
       <AppContextProvider>
-        <div className = "container" style={{padding: "20px"}}>
         <Router>
+          <NavBar/>
           <Routes>
             <Route path="/" exact element={ <Home/> } />
             <Route path="/register/" exact element={ <CreateAccount/> } />
@@ -29,7 +28,6 @@ function App() {
             <Route path="/data/" exact element={ <AllData/> } />
           </Routes>
         </Router>
-        </div>
       </AppContextProvider>
     </>
   )

@@ -5,11 +5,13 @@ import { AppContext } from '../context';
 
 function CreateAccount() {
   return(
-    <Card
-    bgcolor="light"
-    header="Register"
-    body={<CreateAccountForm/>}
-    />
+    <main className="container">
+      <Card
+      bgcolor="light"
+      header="Register"
+      body={<CreateAccountForm/>}
+      />
+    </main>
   );
 }
 
