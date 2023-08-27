@@ -50,7 +50,8 @@ function CreateAccountForm() {
         axios.get(`/api/account/create/${uid}/${firstName}/${lastName}/${email}`)
         .then(function (response) {
           // handle success
-          console.log(response.data);
+          console.log(`Response data...${JSON.stringify(response.data)}`);
+          setCurrentUser(userCredential.user);
         })
         .catch(function (error) {
           // handle error
@@ -58,7 +59,6 @@ function CreateAccountForm() {
         })
         .finally(function () {
           // always executed
-          setCurrentUser(userCredential.user);
         });
         // ...
       })

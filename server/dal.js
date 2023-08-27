@@ -1,55 +1,53 @@
 /*************************************************************************
  * Data Extraction Layer
  ************************************************************************/
-import { MongoClient, ServerApiVersion } from 'mongodb';
+import mongoose from 'mongoose';
+const { Schema } = mongoose;
 
-// Connect to MongoDB Atlas
-const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@blackslashbank.zzgl6ag.mongodb.net/?retryWrites=true&w=majority`;
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
+// Define user schema
+const userSchema = new Schema({
+  _id: {
+    type: String,
+    required: true
+  },
+  firstname: {
+    type: String,
+    required: true
+  },
+  lastname: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  balance: {
+    type: Number,
+    required: true
   }
-});
-let db;
-async function connect() {
-  try {
-    // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-    db = client.db('blackslashbank');
-    console.log(db);
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
-}
-connect().catch(console.dir);
+}, { timestamps: true });
 
-// Create user account
+const User = mongoose.model('User', userSchema);
+
+// Function: Create new user
 async function create(uid, firstname, lastname, email) {
   try {
-    const collection = db.collection("users");
-    // Insert a user document 
-    const result = await collection.insertOne({
-      uid: uid,
+    const newUser = await User.create({
+      _id: uid,
       firstname: firstname,
       lastname:  lastname,
       email:  email,
       balance: 0
     });
-    console.log(`A document was inserted with the _id: ${result.insertedId}`);
-    return result;
+    return newUser;
   } 
   catch (error) {
     throw error;
   }
 };
 
-// All users
+// Function: Get all users
 async function all() {
   try {
     const users = db.collection("users");
