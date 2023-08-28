@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../context';
 import Card from './card';
 import axios from 'axios';
+import formatCurrency from '../utils/formatCurrency';
 
 function Deposit(){
   // App Context
@@ -66,11 +67,6 @@ function Deposit(){
         // always executed
       });
   }
-
-  const balance = (userData.balance).toLocaleString('en-US', { 
-		style: 'currency', 
-		currency: 'USD' 
-	});
   
   const DepositForm = () => {
     return(
@@ -87,7 +83,7 @@ function Deposit(){
               onChange={e => setAmount(e.currentTarget.value)}/><br/>
           </div>
           <div className="form-footer">
-            {userData && <span>Balance: {balance}</span>}
+            {userData && <span>Balance: {formatCurrency(userData.balance)}</span>}
             <button type="submit" 
             className="btn btn-dark" 
             onClick={handleDeposit}>Deposit</button>

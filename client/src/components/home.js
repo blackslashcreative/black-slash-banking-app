@@ -3,6 +3,7 @@ import { AppContext } from '../context';
 import Card from './card';
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import formatCurrency from '../utils/formatCurrency';
 
 function Home() {
   // App Context
@@ -36,18 +37,13 @@ function Home() {
     }
   }, [currentUser]);
 
-  const balance = (userData.balance).toLocaleString('en-US', { 
-		style: 'currency', 
-		currency: 'USD' 
-	});
-
   const UserDashboard = () => {
     return (
       <>
         {userData && (
           <>
             <p>Hi, {userData.firstname}!</p>
-            <h5>Balance: {balance}</h5>
+            <h5>Balance: {formatCurrency(userData.balance)}</h5>
           </>
         )}
       </>

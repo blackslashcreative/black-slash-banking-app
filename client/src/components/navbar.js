@@ -33,9 +33,9 @@ function NavBar(){
             <Nav className="me-auto">
               {currentUser ? (
                 <>
+                  <Nav.Link as={Link} to="/">Dashboard</Nav.Link>
                   <Nav.Link as={Link} to="/deposit/">Deposit</Nav.Link>
                   <Nav.Link as={Link} to="/withdraw/">Withdraw</Nav.Link>
-                  <Nav.Link as={Link} to="/balance/">Balance</Nav.Link>
                 </>
               ) : (
                 <>

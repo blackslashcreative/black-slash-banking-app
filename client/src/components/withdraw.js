@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../context';
 import Card from './card';
 import axios from 'axios';
+import formatCurrency from '../utils/formatCurrency';
 
 function Withdraw(){
   // App Context
@@ -66,11 +67,6 @@ function Withdraw(){
         // always executed
       });
   }
-
-  const balance = (userData.balance).toLocaleString('en-US', { 
-		style: 'currency', 
-		currency: 'USD' 
-	});
   
   const WithdrawForm = () => {
     return(
@@ -87,7 +83,7 @@ function Withdraw(){
               onChange={e => setAmount(e.currentTarget.value)}/>
           </div>
           <div className="form-footer">
-            {userData && (<span>Balance: {balance}</span>)}
+            {userData && (<span>Balance: {formatCurrency(userData.balance)}</span>)}
             <button type="submit" 
             className="btn btn-dark" 
             onClick={handleWithdraw}>Withdraw</button>
