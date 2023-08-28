@@ -66,6 +66,11 @@ function Withdraw(){
         // always executed
       });
   }
+
+  const balance = (userData.balance).toLocaleString('en-US', { 
+		style: 'currency', 
+		currency: 'USD' 
+	});
   
   const WithdrawForm = () => {
     return(
@@ -82,7 +87,7 @@ function Withdraw(){
               onChange={e => setAmount(e.currentTarget.value)}/>
           </div>
           <div className="form-footer">
-            {userData && (<span>Balance: ${userData.balance}</span>)}
+            {userData && (<span>Balance: {balance}</span>)}
             <button type="submit" 
             className="btn btn-dark" 
             onClick={handleWithdraw}>Withdraw</button>

@@ -36,13 +36,18 @@ function Home() {
     }
   }, [currentUser]);
 
+  const balance = (userData.balance).toLocaleString('en-US', { 
+		style: 'currency', 
+		currency: 'USD' 
+	});
+
   const UserDashboard = () => {
     return (
       <>
         {userData && (
           <>
             <p>Hi, {userData.firstname}!</p>
-            <h5>Balance: ${userData.balance}</h5>
+            <h5>Balance: {balance}</h5>
           </>
         )}
       </>

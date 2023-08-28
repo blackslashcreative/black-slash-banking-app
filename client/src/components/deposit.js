@@ -66,6 +66,11 @@ function Deposit(){
         // always executed
       });
   }
+
+  const balance = (userData.balance).toLocaleString('en-US', { 
+		style: 'currency', 
+		currency: 'USD' 
+	});
   
   const DepositForm = () => {
     return(
@@ -82,7 +87,7 @@ function Deposit(){
               onChange={e => setAmount(e.currentTarget.value)}/><br/>
           </div>
           <div className="form-footer">
-            {userData && <span>Balance: ${userData.balance}</span>}
+            {userData && <span>Balance: {balance}</span>}
             <button type="submit" 
             className="btn btn-dark" 
             onClick={handleDeposit}>Deposit</button>
