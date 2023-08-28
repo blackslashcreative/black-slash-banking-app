@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../context';
 import Card from './card';
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 function Home() {
   // App Context
@@ -63,7 +64,9 @@ function Home() {
           <div className="status">Logged in as {currentUser.email}</div>
         </>
       ) : (
-        <>Please log in.</>
+        <>
+        <p>Welcome to Black Slash Bank! Please <Link to="/login">log in</Link>.</p>
+        </>
       )
       }
     </main>

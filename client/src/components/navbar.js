@@ -3,17 +3,21 @@ import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { AppContext } from '../context';
 import { getAuth, signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import logo from '../img/logo.svg';
 
 function NavBar(){
   // App Context
   const context = useContext(AppContext);
   const { currentUser, setCurrentUser } = context;
+  const navigate = useNavigate();
 
   const logMeOut = () => {
     const auth = getAuth();
     signOut(auth).then(() => {
       // Sign-out successful.
       setCurrentUser(null);
+      navigate('/');
     }).catch((error) => {
       // An error happened.
     });
@@ -22,7 +26,7 @@ function NavBar(){
   return(
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand as={Link} to="/">BadBank</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/"><img src={logo} alt="Bank Logo" /></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">

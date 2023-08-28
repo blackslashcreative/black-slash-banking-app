@@ -28,6 +28,10 @@ main:not(#dashboard) > .card .card-header {
   flex-grow: 1;
 }
 
+.navbar-brand img {
+  height: 40px;
+}
+
 .flex-right {
   margin-left: auto;
 }
