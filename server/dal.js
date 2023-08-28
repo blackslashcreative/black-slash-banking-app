@@ -86,4 +86,4 @@ async function withdrawMoney(balance, amount,uid) {
   }
 };
 
-export { create, getUser, depositMoney, withdrawMoney, all };
+export { create, getUser, depositMoney, withdrawMoney };

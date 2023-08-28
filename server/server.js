@@ -6,13 +6,18 @@ import path from 'path';
 import express         from 'express';
 import cors            from 'cors';
 import mongoose from 'mongoose';
-import { create, getUser, depositMoney, withdrawMoney, all } from './dal.js';
+import { create, getUser, depositMoney, withdrawMoney } from './dal.js';
 
 const app = express();
 
-// serve static files from public directory
-app.use(express.static('public'));
+// When in Dev: serve static files from public directory
+// app.use(express.static('public'));
 app.use(cors());
+
+// Test API
+app.get('/api/test', function (req, res) {
+  res.send('it works');
+});
 
 // Create user account
 app.get('/api/account/create/:uid/:firstname/:lastname/:email', function (req, res) {
@@ -68,8 +73,15 @@ mongoose.connect(uri)
   .then(() => {
     // do stuff
     console.log('Connected to Mongo DB Atlas!');
-    const port = 3001;
-    app.listen(port);
+    
+    if (process.env.NODE_ENV === "production") {
+      app.use(express.static("../client/build"));
+      app.get("*", (req,res) => {
+        const myPath = path.join(__dirname, '..', 'client', 'build', 'index.html');
+        res.sendFile(path.resolve(myPath));
+      })
+    }
+    app.listen(process.env.PORT || 3001);
     console.log('Running on port: ' + port);
   })
   .catch((error) => {

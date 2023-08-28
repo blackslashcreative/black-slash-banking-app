@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server/server.js",
     "server": "nodemon server/server.js --ignore client",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefex client && npm run build -- prefix client"
   },
   "type": "module",
   "keywords": [],
