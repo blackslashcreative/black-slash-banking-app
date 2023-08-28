@@ -51,24 +51,27 @@ function Home() {
   }
 
   return(
-    <main id="dashboard" className="container">
-      <h1>Black Slash Bank</h1>
-      {loading &&
-        <p>loading...</p>
-      }
-      {currentUser ? (
-        <>
-          <Card
-          header="Account Dashboard"
-          body={<UserDashboard/>}
-          />
-        </>
-      ) : (
-        <>
-        <p>Welcome to Black Slash Bank! Please <Link to="/login">log in</Link>.</p>
-        </>
-      )
-      }
+    <main id="dashboard">
+      <div className="container">
+        <h1>Black Slash Bank</h1>
+        <img className="banner" src="img/banner.jpg" alt="Screenshot of Bank App"/>
+        {loading &&
+          <p>loading...</p>
+        }
+        {currentUser ? (
+          <>
+            <Card
+            header="Account Dashboard"
+            body={<UserDashboard/>}
+            />
+          </>
+        ) : (
+          <>
+          <p>Welcome to Black Slash Bank! Please <Link to="/login">log in</Link>.</p>
+          </>
+        )
+        }
+      </div>
     </main>
   )
 

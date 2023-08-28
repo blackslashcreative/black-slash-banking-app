@@ -2,6 +2,20 @@ main {
   margin-top: 45px;
 }
 
+#dashboard {
+  margin-top: 0;
+  padding-top: 45px;
+  /*background-image: url('./img/welcome.jpg');*/
+  flex: 1;
+  background-size: cover;
+}
+
+#dashboard > .container > img {
+  max-width: 100%;
+  border-top-right-radius: 55px;
+  margin-bottom: 15px;
+}
+
 main > .card {
   max-width: 450px;
 }
@@ -31,6 +45,11 @@ main:not(#dashboard) > .card .card-header {
 
 .error {
   color: #dc3545;
+}
+
+nav {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 0px 1px;
+  background-image: linear-gradient(135deg, #fdfcfb 0%, #f8f5f394 100%);
 }
 
 .navbar-nav {
