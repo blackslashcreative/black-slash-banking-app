@@ -86,26 +86,4 @@ async function withdrawMoney(balance, amount,uid) {
   }
 };
 
-// Function: Get all users
-async function all() {
-  try {
-    const users = db.collection("users");
-    const query = {};
-    const options = {};
-    const cursor = users.find(query, options);
-    let result = [];
-    // print a message if no documents were found
-    if ((await users.countDocuments(query)) === 0) {
-      console.log("No users found!");
-    }
-    for await (const doc of cursor) {
-      // console.dir(doc);
-      result.push(doc);
-    }
-    return result;
-  } catch (error) {
-    throw error;
-  }
-};
-
 export { create, getUser, depositMoney, withdrawMoney, all };

@@ -2,6 +2,7 @@
  * Express Server
  ************************************************************************/
 import 'dotenv/config';
+import path from 'path';
 import express         from 'express';
 import cors            from 'cors';
 import mongoose from 'mongoose';
@@ -59,18 +60,6 @@ app.get('/api/account/withdraw/:balance/:amount/:uid', function (req, res) {
     .catch((err) => {
       console.error(err);
     })
-});
-
-// all accounts
-app.get('/api/account/all', function (req, res) {
-  all()
-    .then((docs) => {
-      //console.log(docs);
-      res.send(docs);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
 });
 
 // Connect to MongoDB Atlas
