@@ -8,9 +8,9 @@ function Home() {
   const context = useContext(AppContext);
   const { currentUser } = context;
 
+  // load user data
   const [userData, setUserData] = useState(null);
   const [loading, setLoading]   = useState(true);
-
   useEffect((userData) => {
     if (currentUser) {
       // Get user data

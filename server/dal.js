@@ -58,6 +58,20 @@ async function getUser(uid) {
   }
 };
 
+// Function: Make a deposit
+async function depositMoney(balance, amount,uid) {
+  try {
+    //const user = await User.findById(uid);
+    //return user;
+    let newBalance = Number(balance) + Number(amount);
+    let newUser = User.findByIdAndUpdate( uid, { balance: newBalance } );
+    return newUser;
+  } 
+  catch (error) {
+    throw error;
+  }
+};
+
 // Function: Get all users
 async function all() {
   try {
@@ -80,4 +94,4 @@ async function all() {
   }
 };
 
-export { create, getUser, all };
+export { create, getUser, depositMoney, all };
