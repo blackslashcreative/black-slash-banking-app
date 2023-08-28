@@ -6,12 +6,21 @@ main > .card {
   max-width: 450px;
 }
 
-main.form > .card {
-  margin: 0 auto;
+.card h5 {
+  margin-top: 10px;
 }
 
 main:not(#dashboard) > .card .card-header {
   font-size: xx-large;
+}
+
+.card input {
+  margin-bottom: 20px;
+}
+
+.card button {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .alert {
@@ -30,6 +39,16 @@ main:not(#dashboard) > .card .card-header {
 
 .navbar-brand img {
   height: 40px;
+}
+
+#status-bar {
+  float: right;
+  padding: 0.5rem;
+  opacity: 0.7;
+}
+
+.flex-end {
+  justify-content: flex-end;
 }
 
 .flex-right {
