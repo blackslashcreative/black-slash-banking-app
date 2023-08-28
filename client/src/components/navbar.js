@@ -52,7 +52,7 @@ function NavBar(){
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {currentUser && <Container><div id="status-bar" className="flex-right"><small>{currentUser.email}</small></div></Container>}
+      {currentUser && <Container><div id="status-bar" className="flex-right"><small>Logged in as: {currentUser.email}</small></div></Container>}
     </>
   );
 }

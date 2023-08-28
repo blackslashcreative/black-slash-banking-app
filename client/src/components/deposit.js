@@ -81,7 +81,8 @@ function Deposit(){
               value={amount} 
               onChange={e => setAmount(e.currentTarget.value)}/><br/>
           </div>
-          <div className="input-group flex-end">
+          <div className="form-footer">
+            {userData && <span>Balance: ${userData.balance}</span>}
             <button type="submit" 
             className="btn btn-dark" 
             onClick={handleDeposit}>Deposit</button>
@@ -92,11 +93,6 @@ function Deposit(){
             </div>
           )}
         </form>
-        {userData && (
-          <>
-            <h5>Balance: ${userData.balance}</h5>
-          </>
-        )}
       </>
     )
   }
@@ -113,7 +109,6 @@ function Deposit(){
           header=""
           body={<DepositForm/>}
           />
-          <div className="status">Logged in as {currentUser.email}</div>
         </>
       ) : (
         <>Please log in.</>
