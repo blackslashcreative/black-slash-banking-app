@@ -51,17 +51,16 @@ function Home() {
 
   return(
     <main id="dashboard" className="container">
-      <h1>Home</h1>
+      <h1>Black Slash Bank</h1>
       {loading &&
         <p>loading...</p>
       }
       {currentUser ? (
         <>
           <Card
-          header="Your Account"
+          header="Account Dashboard"
           body={<UserDashboard/>}
           />
-          <div className="status">Logged in as {currentUser.email}</div>
         </>
       ) : (
         <>

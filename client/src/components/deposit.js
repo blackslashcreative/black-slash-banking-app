@@ -55,6 +55,7 @@ function Deposit(){
         // handle success
         setUserData(response.data);
         console.log(`Deposit data: ${JSON.stringify(response.data)}`);
+        setAmount(0);
         setReload(true);
       })
       .catch(function (error) {
@@ -70,16 +71,21 @@ function Deposit(){
     return(
       <>
         <form>
-          <input type="number" 
-            className="form-control" 
-            placeholder="Amount" 
-            value={amount} 
-            onChange={e => setAmount(e.currentTarget.value)}/><br/>
-
-          <button type="submit" 
-            className="btn btn-light" 
+          <div className="input-group">
+            <div className="input-group-prepend">
+              <span className="input-group-text" id="basic-addon1">$</span>
+            </div>
+            <input type="number" 
+              className="form-control" 
+              placeholder="Amount" 
+              value={amount} 
+              onChange={e => setAmount(e.currentTarget.value)}/><br/>
+          </div>
+          <div className="input-group flex-end">
+            <button type="submit" 
+            className="btn btn-dark" 
             onClick={handleDeposit}>Deposit</button>
-
+          </div>
           {errorMessage && (
             <div className="alert error">
               {errorMessage}

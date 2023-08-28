@@ -86,30 +86,31 @@ function CreateAccountForm() {
           className="form-control" 
           placeholder="First Name" 
           value={firstName} 
-          onChange={e => setFirstName(e.currentTarget.value)} /><br/>
+          onChange={e => setFirstName(e.currentTarget.value)} />
 
         <input type="input" 
           className="form-control" 
           placeholder="Last Name" 
           value={lastName} 
-          onChange={e => setLastName(e.currentTarget.value)} /><br/>
+          onChange={e => setLastName(e.currentTarget.value)} />
 
         <input type="input" 
           className="form-control" 
           placeholder="Email" 
           value={email} 
-          onChange={e => setEmail(e.currentTarget.value)}/><br/>
+          onChange={e => setEmail(e.currentTarget.value)}/>
 
         <input type="password" 
           className="form-control" 
           placeholder="Password" 
           value={password} 
-          onChange={e => setPassword(e.currentTarget.value)}/><br/>
+          onChange={e => setPassword(e.currentTarget.value)}/>
 
-        <button type="submit" 
-          className="btn btn-light" 
-          onClick={handleFormSubmit}>Create Account</button>
-
+        <div className="input-group flex-end">
+          <button type="submit" 
+            className="btn btn-dark" 
+            onClick={handleFormSubmit}>Create Account</button>
+        </div>
         {errorMessage && (
           <div className="alert error">
             {errorMessage}

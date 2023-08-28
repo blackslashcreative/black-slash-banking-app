@@ -65,18 +65,20 @@ function LoginForm() {
           className="form-control" 
           placeholder="Email" 
           value={email} 
-          onChange={e => setEmail(e.currentTarget.value)}/><br/>
+          onChange={e => setEmail(e.currentTarget.value)}/>
 
         <input type="password" 
           className="form-control" 
           placeholder="Password" 
           value={password} 
-          onChange={e => setPassword(e.currentTarget.value)}/><br/>
-          
-        <button type="submit" 
-          className="btn btn-light" 
-          onClick={handleFormSubmit}>Login</button>
+          onChange={e => setPassword(e.currentTarget.value)}/>
 
+        <div className="input-group flex-end">
+          <button type="submit" 
+            className="btn btn-dark" 
+            onClick={handleFormSubmit}>Login</button>
+        </div>
+        
         {errorMessage && (
           <div className="alert error">
             {errorMessage}
