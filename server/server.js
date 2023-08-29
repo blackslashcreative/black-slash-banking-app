@@ -72,6 +72,7 @@ const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}
 mongoose.connect(uri)
   .then(() => {
     // do stuff
+    const port = 3001;
     console.log('Connected to Mongo DB Atlas!');
     
     if (process.env.NODE_ENV === "production") {
@@ -81,7 +82,7 @@ mongoose.connect(uri)
         res.sendFile(path.resolve(myPath));
       })
     }
-    app.listen(process.env.PORT || 3001);
+    app.listen(process.env.PORT || port);
     console.log('Running on port: ' + port);
   })
   .catch((error) => {
