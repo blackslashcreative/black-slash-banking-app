@@ -2,7 +2,6 @@
  * Express Server
  ************************************************************************/
 import 'dotenv/config';
-import path from 'path';
 import express         from 'express';
 import cors            from 'cors';
 import mongoose from 'mongoose';
@@ -72,19 +71,12 @@ const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}
 mongoose.connect(uri)
   .then(() => {
     // do stuff
-    const port = 3001;
     console.log('Connected to Mongo DB Atlas!');
     
-    if (process.env.NODE_ENV === "production") {
-      app.use(express.static("../client/build"));
-      app.get("*", (req,res) => {
-        const myPath = path.join(__dirname, '..', 'client', 'build', 'index.html');
-        res.sendFile(path.resolve(myPath));
-      })
-    }
-    app.listen(process.env.PORT || port);
-    console.log('Running on port: ' + port);
-  })
+    const port = 3001;
+    app.listen(port);
+      console.log('Running on port: ' + port);
+    })
   .catch((error) => {
     console.log(error)
   })
