@@ -18,6 +18,7 @@ function Home() {
       // Get user data
       console.log(`need to get uid... ${currentUser}`);
       const uid = currentUser.uid;
+      console.log(`got uid... ${uid}`);
       axios.get(`/api/account/${uid}`)
         .then(function (response) {
           // handle success
