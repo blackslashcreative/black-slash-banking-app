@@ -2,7 +2,7 @@ import { createContext, useState } from 'react'
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA1SyZMa6XnFOPqG7puewuiWaSbrKf0h7k",
+  apiKey: process.env.FIREBASE_KEY,
   authDomain: "badbank-72a01.firebaseapp.com",
   projectId: "badbank-72a01",
   storageBucket: "badbank-72a01.appspot.com",
