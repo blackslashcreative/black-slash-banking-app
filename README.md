@@ -21,9 +21,9 @@ Firebase
 
 ## Features & Roadmap
 - [x] Create Account
-- [x] Display All Data
-- [ ] Authenticate: Login/Logout
-- [ ] Deposit/Withdraw
+- [x] Deposit/withdrawal
+- [x] Authenticate: Login/Logout
+- [ ] Check image deposit
 
 ## Hire Me :)
 If you're interested in working together, you can email me here: [ghosty@blacksla.sh](mailto:ghosty@blacksla.sh)
