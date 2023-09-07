@@ -10,6 +10,10 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
+  role: {
+    type: String,
+    required: true
+  },
   firstname: {
     type: String,
     required: true
@@ -35,6 +39,7 @@ async function create(uid, firstname, lastname, email) {
   try {
     const newUser = await User.create({
       _id: uid,
+      role: customer,
       firstname: firstname,
       lastname:  lastname,
       email:  email,
@@ -59,7 +64,7 @@ async function getUser(uid) {
 };
 
 // Function: Make a deposit
-async function depositMoney(balance, amount,uid) {
+async function depositMoney(balance, amount, uid) {
   try {
     //const user = await User.findById(uid);
     //return user;
