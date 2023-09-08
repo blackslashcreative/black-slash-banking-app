@@ -13,10 +13,12 @@ function NavBar(){
   const navigate = useNavigate();
 
   // Check admin user
-  const uid = currentUser.uid;
-  let isAdmin = false;
-  if (uid === "GI2FipVswuTV4UmGPkYGpUAYU1E2") {
-    isAdmin = true;
+  if (currentUser) {
+    const uid = currentUser.uid;
+    let isAdmin = false;
+    if (uid === "GI2FipVswuTV4UmGPkYGpUAYU1E2") {
+      isAdmin = true;
+    }
   }
 
   const logMeOut = () => {
