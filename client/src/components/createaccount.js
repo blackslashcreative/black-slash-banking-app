@@ -50,7 +50,7 @@ function CreateAccountForm() {
       .then((userCredential) => {
         // Signed in 
         const uid = userCredential.user.uid;
-        axios.get(`/api/account/create/${uid}/${firstName}/${lastName}/${email}`)
+        axios.get(`${process.env.REACT_APP_API_URL}/api/account/create/${uid}/${firstName}/${lastName}/${email}`)
         .then(function (response) {
           // handle success
           //console.log(`Response data...${JSON.stringify(response.data)}`);

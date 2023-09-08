@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { AppContext } from '../context';
@@ -11,15 +11,17 @@ function NavBar(){
   const context = useContext(AppContext);
   const { currentUser, setCurrentUser } = context;
   const navigate = useNavigate();
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  // Check admin user
-  let isAdmin = false;
-  if (currentUser) {
-    const uid = currentUser.uid;
-    if (uid === process.env.ADMIN_USER) {
-      isAdmin = true;
+  useEffect(() => {
+    // Check admin user
+    if (currentUser) {
+      const uid = currentUser.uid;
+      if (uid === process.env.REACT_APP_ADMIN_USER) {
+        setIsAdmin(true);
+      }
     }
-  }
+  }, [currentUser]);
 
   const logMeOut = () => {
     const auth = getAuth();
@@ -62,7 +64,7 @@ function NavBar(){
         </Container>
       </Navbar>
       {currentUser && <Container><div id="status-bar" className="flex-right"><small>Logged in as: {currentUser.email}</small></div></Container>}
-      {isAdmin ? <Container><div id="admin-bar" className="flex-right"><small className="text-danger">ADMINISTRATOR</small></div></Container> : <></>}
+      {isAdmin && <Container><div id="admin-bar" className="flex-right"><small className="text-danger">ADMINISTRATOR</small></div></Container>}
     </>
   );
 }

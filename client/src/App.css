@@ -72,9 +72,15 @@ nav, nav.bg-body-tertiary {
   height: 40px;
 }
 
+#admin-bar {
+  float: right;
+  margin-top: -10px;
+}
+
 #status-bar {
   float: right;
   padding: 0.5rem;
+  padding-right: 0;
   opacity: 0.7;
 }
 

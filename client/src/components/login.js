@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import Card from './card';
 import { AppContext } from '../context';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";

@@ -10,6 +10,8 @@ function Home() {
   const context = useContext(AppContext);
   const { currentUser } = context;
 
+  console.log(`process.env = ${JSON.stringify(process.env)}`);
+
   // load user data
   const [userData, setUserData] = useState(null);
   const [loading, setLoading]   = useState(true);
@@ -19,7 +21,7 @@ function Home() {
       console.log(`need to get uid... ${currentUser}`);
       const uid = currentUser.uid;
       console.log(`got uid... ${uid}`);
-      axios.get(`/api/account/${uid}`)
+      axios.get(`${process.env.REACT_APP_API_URL}/api/account/${uid}`)
         .then(function (response) {
           // handle success
           setUserData(response.data);
