@@ -7,6 +7,7 @@ import CreateAccount from './components/createaccount';
 import Login from './components/login';
 import Deposit from './components/deposit';
 import Withdraw from './components/withdraw';
+import Admin from './components/admin';
 import { AppContextProvider } from './context';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path="/login/" exact element={ <Login/> } />
             <Route path="/deposit/" exact element={ <Deposit/> } />
             <Route path="/withdraw/" exact element={ <Withdraw/> } />
+            <Route path="/data/" exact element={ <Admin/> } />
           </Routes>
         </Router>
       </AppContextProvider>

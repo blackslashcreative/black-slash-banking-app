@@ -43,6 +43,9 @@ function NavBar(){
                 <Nav.Link as={Link} to="/register/">Register</Nav.Link>
                 </>
               )}
+              {currentUser && currentUser.role === "admin" && (
+                <Nav.Link as={Link} to="/data/"className="text-danger">All Data</Nav.Link>
+              )}
               {currentUser && (
                 <>
                 <Nav.Link className="flex-right" onClick={logMeOut} to="/logout/">Logout</Nav.Link>

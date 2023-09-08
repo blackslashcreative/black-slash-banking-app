@@ -5,7 +5,7 @@ import 'dotenv/config';
 import express         from 'express';
 import cors            from 'cors';
 import mongoose from 'mongoose';
-import { create, getUser, depositMoney, withdrawMoney } from './dal.js';
+import { create, getUser, depositMoney, withdrawMoney, getBankData } from './dal.js';
 
 const app = express();
 
@@ -34,8 +34,18 @@ app.get('/api/account/create/:uid/:firstname/:lastname/:email', function (req, r
 app.get('/api/account/:uid', function (req, res) {
   getUser(req.params.uid)
     .then((user) => {
-      //console.log(`got the user here... ${JSON.stringify(user)}`);
       res.send(user);
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+});
+
+// Get all user data
+app.get('/api/alldata', function (req, res) {
+  getBankData()
+    .then((data) => {
+      res.send(data);
     })
     .catch((err) => {
       console.error(err);

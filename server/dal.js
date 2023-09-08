@@ -63,6 +63,19 @@ async function getUser(uid) {
   }
 };
 
+
+
+// Function: Get user data
+async function getBankData() {
+  try {
+    const users = await User.find({});
+    return users;
+  } 
+  catch (error) {
+    throw error;
+  }
+};
+
 // Function: Make a deposit
 async function depositMoney(balance, amount, uid) {
   try {
@@ -91,4 +104,4 @@ async function withdrawMoney(balance, amount,uid) {
   }
 };
 
-export { create, getUser, depositMoney, withdrawMoney };
+export { create, getUser, depositMoney, withdrawMoney, getBankData };
