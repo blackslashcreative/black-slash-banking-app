@@ -1,0 +1,155 @@
+{
+  "swagger": "2.0",
+  "info": {
+      "version": "1.0.0", 
+      "title": "Black Slash Bank API",
+      "description": "A simple banking app with an express API."
+  },
+  "host": "bsbank-api.onrender.com",
+  "basePath": "/api/",
+  "schemes": [
+      "https"
+  ],
+  "consumes": [
+      "application/json"
+  ],
+  "produces": [
+      "application/json"
+  ],
+
+  "paths": {
+    "/account/create/{uid}/{firstname}/{lastname}/{email}": {
+      "parameters": [
+        {
+          "name": "uid",
+          "in": "path",
+          "required": true,
+          "description": "ID of the user we want to create (should be passed from authenticator)",
+          "type": "string"
+        },
+        {
+          "name": "firstname",
+          "in": "path",
+          "required": true,
+          "description": "First name of the user we want to create",
+          "type": "string"
+        },
+        {
+          "name": "lastname",
+          "in": "path",
+          "required": true,
+          "description": "Last name of the user we want to create",
+          "type": "string"
+        },
+        {
+          "name": "email",
+          "in": "path",
+          "required": true,
+          "description": "Email address of the user we want to create",
+          "type": "string"
+        }
+      ],
+      "get": {
+          "tags": ["Users"],
+          "summary": "create new user account",
+          "responses": {
+              "200": {
+                  "description": "OK"
+              }
+          }
+      }
+    },
+    "/account/{uid}": {
+      "parameters": [
+        {
+          "name": "uid",
+          "in": "path",
+          "required": true,
+          "description": "id of the user",
+          "type": "string"
+        }
+      ],
+      "get": {
+          "tags": ["Users"],
+          "summary": "get user by id",
+          "responses": {
+              "200": {
+                  "description": "OK"
+              }
+          }
+      }
+    },
+    "/account/deposit/{balance}/{amount}/{uid}": {
+      "parameters": [
+        {
+          "name": "balance",
+          "in": "path",
+          "required": true,
+          "description": "current balance of the account",
+          "type": "number"
+        },
+        {
+          "name": "amount",
+          "in": "path",
+          "required": true,
+          "description": "amount to deposit",
+          "type": "number"
+        },
+        {
+          "name": "uid",
+          "in": "path",
+          "required": true,
+          "description": "id of the user",
+          "type": "string"
+        }
+      ],
+      "get": {
+          "tags": ["Users"],
+          "summary": "deposit money into a user account",
+          "responses": {
+              "200": {
+                  "description": "OK"
+              }
+          }
+      }
+    },
+    "/account/withdraw/{balance}/{amount}/{uid}": {
+      "parameters": [
+        {
+          "name": "balance",
+          "in": "path",
+          "required": true,
+          "description": "current balance of the account",
+          "type": "number"
+        },
+        {
+          "name": "amount",
+          "in": "path",
+          "required": true,
+          "description": "amount to withdraw",
+          "type": "number"
+        },
+        {
+          "name": "uid",
+          "in": "path",
+          "required": true,
+          "description": "id of the user",
+          "type": "string"
+        }
+      ],
+      "get": {
+          "tags": ["Users"],
+          "summary": "withdraw money from a user account",
+          "responses": {
+              "200": {
+                  "description": "OK"
+              }
+          }
+      }
+    }
+  }
+}
+
+
+
+

@@ -6,8 +6,14 @@ import express         from 'express';
 import cors            from 'cors';
 import mongoose from 'mongoose';
 import { create, getUser, depositMoney, withdrawMoney, getBankData } from './dal.js';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './swagger.json' assert { type: 'json' };
 
+// Initialize Express App
 const app = express();
+
+// Swagger Docs
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // When in Dev: serve static files from public directory
 // app.use(express.static('public'));
