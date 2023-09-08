@@ -9,10 +9,16 @@ main {
   background-size: cover;
 }
 
-#dashboard > .container > img {
-  max-width: 100%;
+#dashboard > .container img {
+  width: 100%;
+  max-width: 800px;
   border-top-right-radius: 55px;
   margin-bottom: 15px;
+}
+
+#dashboard .card {
+  margin-top: 56px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 main > .card {
@@ -36,9 +42,28 @@ main:not(#dashboard) > .card .card-header {
   margin-bottom: 5px;
 }
 
+a {
+  color: rgb(61, 220, 145);
+}
+
+.gradient-divider {
+  border: 0;
+  height: 10px;
+  border-radius: 15px;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(90deg, rgba(2, 19, 1, 0.8) 0%, rgba(61,220,145,1) 35%, rgba(0,255,233,1) 100%);
+}
+
+.gradient-footer {
+  border: 0;
+  height: 10px;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.8) 0%, rgba(61,220,145,1) 35%, rgba(0,255,233,1) 100%);
+}
+
 .btn-dark {
   color: rgba(0, 0, 0, 0.87);
-  background-color: rgb(61, 220, 145);
+  background-color: #3ddc91;
   border-color: rgb(61, 220, 145);
 }
 
@@ -94,6 +119,11 @@ nav, nav.bg-body-tertiary {
 
 .flex-right {
   margin-left: auto;
+}
+
+main.form > .card {
+  margin: 15px auto;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .form-footer {

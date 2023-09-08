@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { AppContext } from '../context';
 import Card from './card';
+import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import formatCurrency from '../utils/formatCurrency';
 
@@ -23,25 +24,35 @@ function Home() {
   }
 
   return(
+    <>
     <main id="dashboard">
-      <div className="container">
-        <h1>Black Slash Bank</h1>
-        <img className="banner" src="img/banner.jpg" alt="Screenshot of Bank App"/>
-        {currentUser ? (
-          <>
-            <Card
-            header="Account Dashboard"
-            body={<UserDashboard/>}
-            />
-          </>
-        ) : (
-          <>
-          <p>Welcome to Black Slash Bank! Please <Link to="/login">log in</Link>.</p>
-          </>
-        )
-        }
-      </div>
+      <Container>
+        <Row>
+          <Col md={8}>
+            <h1>Black Slash Bank</h1>
+            <img className="banner" src="img/banner.jpg" alt="Screenshot of Bank App"/>
+          </Col>
+          <Col>
+            {currentUser ? (
+              <>
+                <Card
+                header="Account Dashboard"
+                body={<UserDashboard/>}
+                />
+              </>
+            ) : (
+              <>
+              <p>Welcome to Black Slash Bank! Please <Link to="/login">log in</Link>.</p>
+              <hr className="gradient-divider" />
+              </>
+            )
+            }
+          </Col>
+        </Row>
+      </Container>
     </main>
+    <div className="gradient-footer"></div>
+    </>
   )
 
 }
