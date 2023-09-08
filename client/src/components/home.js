@@ -1,11 +1,23 @@
 import { useContext } from 'react';
 import { AppContext } from '../context';
+import axios from 'axios';
 import Card from './card';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import formatCurrency from '../utils/formatCurrency';
 
 function Home() {
+  // Wake up server
+  const wakeServer = async () => {
+    try {
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/test`);
+      console.log(`Pinged server... ${res.data}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  wakeServer();
+  
   // App Context
   const context = useContext(AppContext);
   const { currentUser } = context;

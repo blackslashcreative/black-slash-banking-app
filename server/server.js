@@ -21,7 +21,7 @@ app.use(cors());
 
 // Test API
 app.get('/api/test', function (req, res) {
-  res.send('it works');
+  res.send('it works!');
 });
 
 // Create user account
