@@ -16,7 +16,7 @@ function NavBar(){
   if (currentUser) {
     const uid = currentUser.uid;
     let isAdmin = false;
-    if (uid === "GI2FipVswuTV4UmGPkYGpUAYU1E2") {
+    if (uid === process.env.ADMIN_USER) {
       isAdmin = true;
     }
   }
