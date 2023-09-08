@@ -53,7 +53,7 @@ function NavBar(){
         </Container>
       </Navbar>
       {currentUser && <Container><div id="status-bar" className="flex-right"><small>Logged in as: {currentUser.email}</small></div></Container>}
-      {currentUser.role === "admin" ? <Container><div id="admin-bar" className="flex-right"><small className="text-danger">ADMINISTRATOR</small></div></Container> : <></>}
+      {currentUser && currentUser.role === "admin" ? <Container><div id="admin-bar" className="flex-right"><small className="text-danger">ADMINISTRATOR</small></div></Container> : <></>}
     </>
   );
 }
