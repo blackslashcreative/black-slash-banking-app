@@ -22,7 +22,7 @@ function Deposit(){
       // Get user data
       console.log(`need to get uid... ${currentUser}`);
       const uid = currentUser.uid;
-      axios.get(`/api/account/${uid}`)
+      axios.get(`${process.env.REACT_APP_API_URL}/api/account/${uid}`)
         .then(function (response) {
           // handle success
           setUserData(response.data);
@@ -51,7 +51,7 @@ function Deposit(){
     }
     // Make the deposit
     const uid = currentUser.uid;
-    axios.get(`/api/account/deposit/${userData.balance}/${amount}/${uid}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/api/account/deposit/${userData.balance}/${amount}/${uid}`)
       .then(function (response) {
         // handle success
         setUserData(response.data);
