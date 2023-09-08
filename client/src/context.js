@@ -1,7 +1,6 @@
 import { createContext, useState } from 'react'
 import { initializeApp } from "firebase/app";
 
-console.log(`process.env = ${JSON.stringify(process.env)}`);
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_KEY,
   authDomain: "badbank-72a01.firebaseapp.com",

@@ -53,9 +53,13 @@ function CreateAccountForm() {
         axios.get(`${process.env.REACT_APP_API_URL}/api/account/create/${uid}/${firstName}/${lastName}/${email}`)
         .then(function (response) {
           // handle success
-          //console.log(`Response data...${JSON.stringify(response.data)}`);
-          //console.log(`userCredential.user... ${JSON.stringify(userCredential.user)}`);
-          setCurrentUser(userCredential.user);
+          axios.get(`${process.env.REACT_APP_API_URL}/api/account/${userCredential.user.uid}`)
+            .then(function (response) {
+              setCurrentUser(response.data);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
           setTimeout(() => {
             navigate('/')
           }, 2000);
@@ -71,8 +75,7 @@ function CreateAccountForm() {
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(`Auth Error: ${errorCode} + ${errorMessage}`);
+        setErrorMessage(`Error: ${errorCode}`);
       });
   }
 

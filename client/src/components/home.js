@@ -1,7 +1,6 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { AppContext } from '../context';
 import Card from './card';
-import axios from 'axios';
 import { Link } from "react-router-dom";
 import formatCurrency from '../utils/formatCurrency';
 
@@ -10,43 +9,13 @@ function Home() {
   const context = useContext(AppContext);
   const { currentUser } = context;
 
-  console.log(`process.env = ${JSON.stringify(process.env)}`);
-
-  // load user data
-  const [userData, setUserData] = useState(null);
-  const [loading, setLoading]   = useState(true);
-  useEffect((userData) => {
-    if (currentUser) {
-      // Get user data
-      console.log(`need to get uid... ${currentUser}`);
-      const uid = currentUser.uid;
-      console.log(`got uid... ${uid}`);
-      axios.get(`${process.env.REACT_APP_API_URL}/api/account/${uid}`)
-        .then(function (response) {
-          // handle success
-          setUserData(response.data);
-          console.log(`Homepage userData: ${JSON.stringify(userData)}`);
-          setLoading(false);
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-        .finally(function () {
-          // always executed
-        });
-    } else {
-      setLoading(false);
-    }
-  }, [currentUser]);
-
   const UserDashboard = () => {
     return (
       <>
-        {userData && (
+        {currentUser && (
           <>
-            <p>Hi, {userData.firstname}!</p>
-            <h5>Balance: {formatCurrency(userData.balance)}</h5>
+            <p>Hi, {currentUser.firstname}!</p>
+            <h5>Balance: {formatCurrency(currentUser.balance)}</h5>
           </>
         )}
       </>
@@ -58,9 +27,6 @@ function Home() {
       <div className="container">
         <h1>Black Slash Bank</h1>
         <img className="banner" src="img/banner.jpg" alt="Screenshot of Bank App"/>
-        {loading &&
-          <p>loading...</p>
-        }
         {currentUser ? (
           <>
             <Card

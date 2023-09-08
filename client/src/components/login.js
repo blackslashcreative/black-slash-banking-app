@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import Card from './card';
 import { AppContext } from '../context';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
 function Login(){
@@ -18,13 +19,10 @@ function Login(){
 function LoginForm() {
   // App Context
   const context = useContext(AppContext);
-  console.log(`context: ${JSON.stringify(context)}`);
   const { currentUser, setCurrentUser } = context;
-  console.log(`currentUser: ${JSON.stringify(currentUser)}`);
   // Form State
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   // Redirect after login 
@@ -36,7 +34,6 @@ function LoginForm() {
     //const userExists = 
     if (!email || !password) {
       setErrorMessage('Oops! Please double check your login info.');
-      setSuccessMessage('');
       return
     }
     // Log in
@@ -44,15 +41,21 @@ function LoginForm() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
-        setCurrentUser(userCredential.user);
+        axios.get(`${process.env.REACT_APP_API_URL}/api/account/${userCredential.user.uid}`)
+          .then(function (response) {
+            // handle success
+            setCurrentUser(response.data);
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+          });
         setTimeout(() => {
           navigate('/')
         }, 2000);
         // ...
       })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+      .catch(() => {
         setErrorMessage('Oops! Please double check your login info.')
       });
   }

@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import { AppContext } from '../context';
 import Card from './card';
 import axios from 'axios';
@@ -7,40 +7,11 @@ import formatCurrency from '../utils/formatCurrency';
 function Deposit(){
   // App Context
   const context = useContext(AppContext);
-  const { currentUser } = context;
+  const { currentUser, setCurrentUser } = context;
 
   // form state
   const [amount, setAmount] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-
-  // load user data
-  const [userData, setUserData] = useState(null);
-  const [loading, setLoading]   = useState(true);
-  const [reload, setReload]   = useState(false);
-  useEffect((userData) => {
-    if (currentUser) {
-      // Get user data
-      console.log(`need to get uid... ${currentUser}`);
-      const uid = currentUser.uid;
-      axios.get(`${process.env.REACT_APP_API_URL}/api/account/${uid}`)
-        .then(function (response) {
-          // handle success
-          setUserData(response.data);
-          console.log(`Fetch userData: ${JSON.stringify(userData)}`);
-          setLoading(false);
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-        .finally(function () {
-          // always executed
-          setReload(false);
-        });
-    } else {
-      setLoading(false);
-    }
-  }, [currentUser, reload]);
 
   function handleDeposit(e) {
     e.preventDefault();
@@ -50,14 +21,18 @@ function Deposit(){
       return
     }
     // Make the deposit
-    const uid = currentUser.uid;
-    axios.get(`${process.env.REACT_APP_API_URL}/api/account/deposit/${userData.balance}/${amount}/${uid}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/api/account/deposit/${currentUser.balance}/${amount}/${currentUser._id}`)
       .then(function (response) {
-        // handle success
-        setUserData(response.data);
-        console.log(`Deposit data: ${JSON.stringify(response.data)}`);
+        // handle success = get updated user data
+        axios.get(`${process.env.REACT_APP_API_URL}/api/account/${currentUser._id}`)
+          .then(function (response) {
+            setCurrentUser(response.data);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        // reset form 
         setAmount(0);
-        setReload(true);
       })
       .catch(function (error) {
         // handle error
@@ -83,7 +58,7 @@ function Deposit(){
               onChange={e => setAmount(e.currentTarget.value)}/><br/>
           </div>
           <div className="form-footer">
-            {userData && <span>Balance: {formatCurrency(userData.balance)}</span>}
+            <span>Balance: {formatCurrency(currentUser.balance)}</span>
             <button type="submit" 
             className="btn btn-dark" 
             onClick={handleDeposit}>Deposit</button>
@@ -101,9 +76,6 @@ function Deposit(){
   return (
     <main id="deposit" className="container">
       <h1>Deposit</h1>
-      {loading &&
-        <p>loading...</p>
-      }
       {currentUser ? (
         <>
           <Card
