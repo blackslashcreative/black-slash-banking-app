@@ -39,7 +39,7 @@ async function create(uid, firstname, lastname, email) {
   try {
     const newUser = await User.create({
       _id: uid,
-      role: customer,
+      role: "customer",
       firstname: firstname,
       lastname:  lastname,
       email:  email,
