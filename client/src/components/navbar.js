@@ -13,9 +13,9 @@ function NavBar(){
   const navigate = useNavigate();
 
   // Check admin user
+  let isAdmin = false;
   if (currentUser) {
     const uid = currentUser.uid;
-    let isAdmin = false;
     if (uid === process.env.ADMIN_USER) {
       isAdmin = true;
     }
