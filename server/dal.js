@@ -65,7 +65,7 @@ async function getUser(uid) {
 
 
 
-// Function: Get user data
+// Function: Get user data -- all bank data
 async function getBankData() {
   try {
     const users = await User.find({});
