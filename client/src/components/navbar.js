@@ -36,6 +36,8 @@ function NavBar(){
                   <Nav.Link as={Link} to="/">Dashboard</Nav.Link>
                   <Nav.Link as={Link} to="/deposit/">Deposit</Nav.Link>
                   <Nav.Link as={Link} to="/withdraw/">Withdraw</Nav.Link>
+                  <Nav.Link as={Link} to="/description/">Description</Nav.Link>
+
                 </>
               ) : (
                 <>

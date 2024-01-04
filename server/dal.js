@@ -103,5 +103,14 @@ async function withdrawMoney(balance, amount,uid) {
     throw error;
   }
 };
+async function deleteUser(uid) {
+  try {
+    const deletedUser = await User.findByIdAndDelete(uid);
+    return deletedUser;
+  } catch (error) {
+    throw error;
+  }
+}
 
-export { create, getUser, depositMoney, withdrawMoney, getBankData };
+
+export { create, getUser, depositMoney, withdrawMoney, getBankData,deleteUser };

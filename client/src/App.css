@@ -1,5 +1,6 @@
 main {
   margin-top: 45px;
+
 }
 
 #dashboard {
@@ -7,22 +8,24 @@ main {
   padding-top: 45px;
   flex: 1;
   background-size: cover;
+  background-color: #10ec850c;
 }
 
 #dashboard > .container img {
   width: 100%;
   max-width: 800px;
-  border-top-right-radius: 55px;
+  border-top-right-radius: 15px;
   margin-bottom: 15px;
 }
 
 #dashboard .card {
   margin-top: 56px;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  box-shadow: rgb(61, 220, 145);
 }
 
 main > .card {
   max-width: 450px;
+  margin: auto;
 }
 
 .card h5 {
@@ -51,9 +54,12 @@ a {
   height: 10px;
   border-radius: 15px;
   background: rgb(0, 0, 0);
-  background: linear-gradient(90deg, rgba(2, 19, 1, 0.8) 0%, rgba(61,220,145,1) 35%, rgba(0,255,233,1) 100%);
+  background: linear-gradient(90deg, rgba(2, 19, 1, 0.8) 0%, rgb(11, 159, 245) 35%, rgb(6, 236, 110) 100%);
 }
-
+main:not(#dashboard) > .card .card-header {
+  font-size: x-large;
+  text-align: center;
+}
 .gradient-footer {
   border: 0;
   height: 10px;
@@ -83,14 +89,20 @@ a {
   color: #dc3545;
 }
 
+
 nav, nav.bg-body-tertiary {
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 0px 1px;
-  /*background-image: linear-gradient(135deg, #fdfcfb 0%, #f8f5f394 100%);*/
-  background-color: rgb(237 247 243 / 62%) !important;
+  box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  background-color: #3ddc91;
+  color: #fff;
 }
 
 .navbar-nav {
   flex-grow: 1;
+
+}
+.navbar-nav :hover{
+  color: rgb(61, 220, 145);
+  
 }
 
 .navbar-brand img {
@@ -101,6 +113,7 @@ nav, nav.bg-body-tertiary {
   float: right;
   margin-top: -10px;
 }
+
 
 #status-bar {
   float: right;
@@ -123,8 +136,13 @@ nav, nav.bg-body-tertiary {
 
 main.form > .card {
   margin: 15px auto;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  box-shadow: 0px 8px 24px rgba(149, 157, 165, 0.2);
+  background-color: #fff;
+  color: #333;
+  padding: 20px;
+  border-radius: 10px;
 }
+
 
 .form-footer {
   display: flex;
@@ -136,4 +154,10 @@ main.form > .card {
   margin-top: 10px;
   font-weight: 500;
   font-size: 1.3em;
+}
+#account-details.container{
+  margin: 15px auto;
+  border-radius: 10px;
+
+text-align:center;
 }

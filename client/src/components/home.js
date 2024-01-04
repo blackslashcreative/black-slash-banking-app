@@ -4,13 +4,12 @@ import axios from 'axios';
 import Card from './card';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import formatCurrency from '../utils/formatCurrency';
 
 function Home() {
   // Wake up server
   const wakeServer = async () => {
     try {
-      const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/test`);
+      const res = await axios.get(`http://localhost:3001/api/test`);
       console.log(`Pinged server... ${res.data}`);
     } catch (error) {
       console.log(error);
@@ -27,8 +26,8 @@ function Home() {
       <>
         {currentUser && (
           <>
-            <p>Hi, {currentUser.firstname}!</p>
-            <h5>Balance: {formatCurrency(currentUser.balance)}</h5>
+            <p>Hi, {currentUser.firstname}{currentUser.lastname}!</p>
+            <p>Paradise Awaits in Every Transaction</p>
           </>
         )}
       </>
@@ -41,20 +40,20 @@ function Home() {
       <Container>
         <Row>
           <Col md={8}>
-            <h1>Black Slash Bank</h1>
+            <h1>Boss Bank</h1>
             <img className="banner" src="img/banner.jpg" alt="Screenshot of Bank App"/>
           </Col>
           <Col>
             {currentUser ? (
               <>
                 <Card
-                header="Account Dashboard"
+                header="Wellcome"
                 body={<UserDashboard/>}
                 />
               </>
             ) : (
               <>
-              <p>Welcome to Black Slash Bank! Please <Link to="/login">log in</Link>.</p>
+              <p>Welcome to Boss Bank! Please <Link to="/login">log in</Link>.</p>
               <hr className="gradient-divider" />
               </>
             )

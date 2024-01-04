@@ -5,7 +5,7 @@ import 'dotenv/config';
 import express         from 'express';
 import cors            from 'cors';
 import mongoose from 'mongoose';
-import { create, getUser, depositMoney, withdrawMoney, getBankData } from './dal.js';
+import { create, getUser, depositMoney, withdrawMoney, getBankData,deleteUser } from './dal.js';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from './swagger.json' assert { type: 'json' };
 
@@ -82,8 +82,24 @@ app.get('/api/account/withdraw/:balance/:amount/:uid', function (req, res) {
     })
 });
 
+app.delete('/api/account/delete/:uid', async (req, res) => {
+  const userId = req.params.uid;
+
+  try {
+    const deletedUser = await deleteUser(userId);
+    if (deletedUser) {
+      res.sendStatus(204); // 204 No Content
+    } else {
+      res.status(404).json({ error: 'User not found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error deleting user' });
+  }
+});
+
 // Connect to MongoDB Atlas
-const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@blackslashbank.zzgl6ag.mongodb.net/bankdb?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://anandhakrishnan56789:aka123and@cluster1.emjykuj.mongodb.net/BANK?retryWrites=true&w=majority`;
 mongoose.connect(uri)
   .then(() => {
     // do stuff

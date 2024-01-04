@@ -31,35 +31,39 @@ function LoginForm() {
   function handleFormSubmit(e) {
     e.preventDefault();
     setErrorMessage('');
-    //const userExists = 
+  
     if (!email || !password) {
-      setErrorMessage('Oops! Please double check your login info.');
-      return
+      setErrorMessage('Oops! Please double-check your login info.');
+      return;
     }
-    // Log in
+  
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in 
-        axios.get(`${process.env.REACT_APP_API_URL}/api/account/${userCredential.user.uid}`)
+        // Signed in
+        const uid = userCredential.user.uid;
+  
+        // Fetch user data from the API
+        axios.get(`http://localhost:3001/api/account/${uid}`)
           .then(function (response) {
-            // handle success
-            setCurrentUser(response.data);
+            // Handle success
+            const userData = response.data;
+            setCurrentUser(userData);
+            navigate('/');
           })
           .catch(function (error) {
-            // handle error
-            console.log(error);
+            // Handle API request error
+            console.error(error);
+            setErrorMessage('Failed to fetch user data.');
           });
-        setTimeout(() => {
-          navigate('/')
-        }, 2000);
-        // ...
       })
-      .catch(() => {
-        setErrorMessage('Oops! Please double check your login info.')
+      .catch((error) => {
+        // Handle Firebase authentication error
+        console.error(error);
+        setErrorMessage('Oops! Please double-check your login info.');
       });
   }
-
+  
   return (
     <>
       {currentUser ? <div className="alert success">Logged in as {currentUser.email}</div> : (

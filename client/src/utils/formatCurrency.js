@@ -1,7 +1,7 @@
 function formatCurrency(amount) {
-  return (amount).toLocaleString('en-US', { 
+  return amount.toLocaleString('en-IN', { 
     style: 'currency', 
-    currency: 'USD' 
+    currency: 'INR' 
   });
 }
 

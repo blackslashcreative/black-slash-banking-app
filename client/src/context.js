@@ -2,15 +2,16 @@ import { createContext, useState } from 'react'
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_KEY,
-  authDomain: "badbank-72a01.firebaseapp.com",
-  projectId: "badbank-72a01",
-  storageBucket: "badbank-72a01.appspot.com",
-  messagingSenderId: "860376193878",
-  appId: "1:860376193878:web:f5d697a740cff9b1e594f7"
+  apiKey: "AIzaSyDxsrogudOOExtyk1UJ2fjQH1MUNeMF0tc",
+  authDomain: "try-ap.firebaseapp.com",
+  projectId: "try-ap",
+  storageBucket: "try-ap.appspot.com",
+  messagingSenderId: "832219077499",
+  appId: "1:832219077499:web:e3328d438eac5a6bd33bde",
+  measurementId: "G-S6XR8YQGFP"
 };
 const firebaseapp = initializeApp(firebaseConfig);
-
+// const analytics = getAnalytics(app);
 export const AppContext = createContext({
   currentUser: null,
   setCurrentUser: () => {},

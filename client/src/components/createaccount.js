@@ -32,28 +32,61 @@ function CreateAccountForm() {
   // Display success message and redirect after registration
   const navigate = useNavigate();
   useEffect(() => {
-    {currentUser &&
-      setSuccessMessage(`Logged in as ${currentUser.email}`);
-    }
-  }, [currentUser]);
+  if (currentUser) {
+    setSuccessMessage(`Logged in as ${currentUser.email}`);
+  }
+}, [currentUser]);
 
-  function handleFormSubmit(e) {
-    e.preventDefault();
-    setErrorMessage('');
-    //const userExists = 
-    if (!firstName || !lastName || !email || !password) {
-      setErrorMessage('All fields are required.');
-      setSuccessMessage('');
-      return
-    }
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in 
-        const uid = userCredential.user.uid;
-        axios.get(`${process.env.REACT_APP_API_URL}/api/account/create/${uid}/${firstName}/${lastName}/${email}`)
+function handleFormSubmit(e) {
+  e.preventDefault();
+  setErrorMessage('');
+
+  // Validate the First Name and Last Name fields
+  const nameRegExp = /^[A-Za-z]+$/; // Regular expression for letters only
+
+  if (!nameRegExp.test(firstName) || !nameRegExp.test(lastName)) {
+    setErrorMessage('First Name and Last Name must contain only letters.');
+    setSuccessMessage('');
+    return;
+  }
+
+  // Check if any of the required fields are empty
+  if (!firstName || !lastName || !email || !password) {
+    setErrorMessage('All fields are required.');
+    setSuccessMessage('');
+    return;
+  }
+
+  // Validate the password
+  if (password.length < 8) {
+    setErrorMessage('Password must be at least 8 characters long.');
+    setSuccessMessage('');
+    return;
+  }
+
+  // Use a regular expression to check for at least three alphabetic characters
+  const alphabeticCount = password.replace(/[^a-zA-Z]/g, '').length;
+  if (alphabeticCount < 3) {
+    setErrorMessage('Password must contain at least three alphabetic characters.');
+    setSuccessMessage('');
+    return;
+  }
+
+  // Use a regular expression to check for at least one special character
+  if (!/[!@#$%^&*()_+{}[\]:;<>,.?~\\-]/.test(password)) {
+    setErrorMessage('Password must contain at least one special character.');
+    setSuccessMessage('');
+    return;
+  }
+
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in
+      const uid = userCredential.user.uid;
+      axios.get(`http://localhost:3001/api/account/create/${uid}/${firstName}/${lastName}/${email}`)
         .then(function (response) {
           // handle success
-          axios.get(`${process.env.REACT_APP_API_URL}/api/account/${userCredential.user.uid}`)
+          axios.get(`http://localhost:3001/api/account/${userCredential.user.uid}`)
             .then(function (response) {
               setCurrentUser(response.data);
             })
@@ -61,23 +94,20 @@ function CreateAccountForm() {
               console.log(error);
             });
           setTimeout(() => {
-            navigate('/')
+            navigate('/');
           }, 2000);
         })
         .catch(function (error) {
           // handle error
           console.log(error);
-        })
-        .finally(function () {
-          // always executed
         });
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        setErrorMessage(`Error: ${errorCode}`);
-      });
-  }
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      setErrorMessage(`Error: ${errorCode}`);
+    });
+}
+
 
   return (
     <>
